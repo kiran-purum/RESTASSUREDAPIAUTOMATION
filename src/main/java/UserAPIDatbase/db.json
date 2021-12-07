@@ -1,0 +1,51 @@
+{
+  "MOVIES": [
+    {
+      "id": 111,
+      "title": "AKANDHA",
+      "actor": "BALAYYA"
+    },
+    {
+      "id": 222,
+      "title": "RRR",
+      "actor": "NTR & RAM"
+    },
+    {
+      "id": 333,
+      "title": "SPIDEY-DONT GO HOME",
+      "actor": "TOM HOLLAND & ZENDAYA"
+    },
+    {
+      "id": 444,
+      "title": "FAST AND FURIOUS",
+      "actor": "DOM & BRAYAN"
+    }
+  ],
+  "SPORTS": [
+    {
+      "id": 16,
+      "batsmen": "EOIN MORGON",
+      "country": "ENGLAND"
+    },
+    {
+      "id": 12,
+      "batsmen": "YUVRAJ SINGH",
+      "country": "INDIA"
+    },
+    {
+      "id": 18,
+      "batsmen": "ADAM GILLCHRIST",
+      "country": "AUSTRALIA"
+    },
+    {
+      "id": 333,
+      "batsmen": "CHRIS GAYLE",
+      "country": "WEST INDIES"
+    },
+    {
+      "country": "ENGLAND",
+      "batsmen": "AIDEN BLIZZARD",
+      "id": 21
+    }
+  ]
+}
