@@ -11,12 +11,7 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.*;
 import io.restassured.http.*;
 
-public class HttpMethodsExamples {
-
-    @BeforeTest
-    public void setUpBaseURI() {
-        baseURI = "https://reqres.in/api";
-    }
+public class HttpMethodsExamples extends  BaseTest {
 
     @Test(priority = 0)
     public void httpGetMethod() {
@@ -33,14 +28,14 @@ public class HttpMethodsExamples {
     }
 
     @Test(priority = 1)
-    public void httpPostMethod() {
+    public void createUserTest() {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", "KIRAN");
         map.put("job", "TESTER");
         JSONObject request = new JSONObject(map);
-        System.out.println(request.toJSONString());
+
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
-                when().post("/users").
+                when().post("users").
                 then().statusCode(201).log().all();
     }
 

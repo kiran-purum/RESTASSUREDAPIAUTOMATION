@@ -1,26 +1,31 @@
 package com.test;
 
+import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import static io.restassured.RestAssured.*;
 import io.restassured.response.Response;
 import static org.hamcrest.Matchers.*;
 
-public class FirstTest {
+public class FirstTest extends BaseTest {
 
-        @BeforeTest
-        public void setUpBaseURI() {
-            baseURI = "https://reqres.in/api";
-        }
         @Test(priority = 0)
-        public static void testListOfUsers() {
-            Response response = get("/users?page=2");
-            System.out.println(response.asPrettyString());
-            System.out.println(response.getContentType());
-            System.out.println(response.getTime());
-            int statusCode = response.getStatusCode();
-            Assert.assertEquals(statusCode, 200);
+        public static void getListOfUserByPageNoTest() {
+            int pageNumber = 1;
+            Response response =  given().queryParam("page", pageNumber)
+                    .when().get("users")
+                    .then().extract().response();
+            Assert.assertEquals(response.statusCode(), 200);
+
+            JsonPath jsonPath = new JsonPath(response.asString());
+            Assert.assertEquals(jsonPath.getInt("page"), pageNumber);
+            Assert.assertEquals(jsonPath.getInt("per_page"), 6);
+            Assert.assertEquals(jsonPath.getInt("total"), 12);
+            Assert.assertEquals(jsonPath.getList("data").size(), 6);
+            Assert.assertTrue(jsonPath.getString("data[0].email").contains("@reqres.in"));
+            Assert.assertEquals(jsonPath.getString("data[0].email"), "george.bluth@reqres.in");
         }
+
         @Test(priority = 1)
         public static void testSingleUser() {
             given().get("/users?page=2").
