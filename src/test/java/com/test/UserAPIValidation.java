@@ -21,8 +21,8 @@ public class UserAPIValidation {
 
     @Test(priority = 1)
     public void getListOfSports() {
-         given().get("http://localhost:3000/SPORTS").
-         then().statusCode(200).log().all();
+        given().get("http://localhost:3000/SPORTS").
+                then().statusCode(200).log().all();
     }
 
     @Test(priority = 2)
@@ -60,10 +60,11 @@ public class UserAPIValidation {
         map.put("actor", "JAMES BOND");
         map.put("id", 8);
         JSONObject request = new JSONObject(map);
+        System.out.println(request.toJSONString());
         baseURI = "http://localhost:3000";
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
-        when().post("/MOVIES").
-        then().statusCode(201).log().all();
+                when().post("/MOVIES").
+                then().statusCode(201).log().all();
     }
 
     @Test(priority = 7)
@@ -73,14 +74,15 @@ public class UserAPIValidation {
         map.put("country", "ENGLAND");
         map.put("id", 21);
         JSONObject request = new JSONObject(map);
+        System.out.println(request.toJSONString());
         baseURI = "http://localhost:3000";
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
-        when().post("/SPORTS").
-        then().statusCode(201).log().all();
+                when().post("/SPORTS").
+                then().statusCode(201).log().all();
     }
 
     @Test(priority = 8)
-    public void putDataInMovies() {
+    public void putData() {
         Map<String, Object> map = new HashMap<String, Object>();
 //        map.put("title", "THE 100");
 //        map.put("actor", "CLARKE");
@@ -89,7 +91,7 @@ public class UserAPIValidation {
         System.out.println(request.toJSONString());
         baseURI = "http://localhost:3000";
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
-        when().put("/MOVIES[5].actor").
-        then().statusCode(404).log().all();
+                when().put("/MOVIES[5].actor").
+                then().statusCode(404).log().all();
     }
 }

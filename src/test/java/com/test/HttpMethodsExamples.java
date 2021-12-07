@@ -1,76 +1,85 @@
 package com.test;
 
-
 import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.json.simple.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.*;
-import io.restassured.http.*;
 
-public class HttpMethodsExamples extends  BaseTest {
-
-    @Test(priority = 0)
-    public void httpGetMethod() {
-        given().
-                get("/users?page=2").
-                then().
-                statusCode(200).
-                body("data[1].id", equalTo(8)).
-                body("data[0].email", equalTo("michael.lawson@reqres.in")).
-                body("data[0].first_name", equalTo("Michael")).
-                body("data[0].last_name", equalTo("Lawson")).
-                body("data[0].avatar", equalTo("https://reqres.in/img/faces/7-image.jpg")).
-                body("data.first_name", hasItems("Michael", "Lindsay"));
-    }
-
-    @Test(priority = 1)
-    public void createUserTest() {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("name", "KIRAN");
-        map.put("job", "TESTER");
-        JSONObject request = new JSONObject(map);
-
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
-                when().post("users").
-                then().statusCode(201).log().all();
-    }
-
-    @Test(priority = 2)
-    public void httpPutMethod() {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("name", "KIRAN");
-        map.put("job", "TESTER");
-        JSONObject request = new JSONObject(map);
-        System.out.println(request.toJSONString());
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
-                when().put("/users/2").
-                then().statusCode(200).log().all();
-    }
-
-    @Test(priority = 3)
-    public void httpPatchMethod() {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("name", "KIRAN");
-        map.put("job", "TESTER");
-        JSONObject request = new JSONObject(map);
-        System.out.println(request.toJSONString());
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
-                when().patch("api/users/2").
-                then().statusCode(200).log().all();
-    }
+public class HttpMethodsExamples extends BaseTest {
 
     @Test(priority = 4)
-    public void httpDeleteMethod() {
-        when().delete("api/users/2").
-                then().statusCode(204).log().all();
+    public void getUserByIdAndNameByPageNo() {
+        int pageNumber = 1;
+        Response response = given().queryParam("page", pageNumber)
+                .when().get("users")
+                .then().extract().response();
+        Assert.assertEquals(response.statusCode(), 200);
+
+        JsonPath jsonPath = new JsonPath(response.asString());
+        Assert.assertEquals(jsonPath.getInt("data[0].id"), 1);
+        Assert.assertEquals(jsonPath.getString("data[0].email"), "george.bluth@reqres.in");
+        Assert.assertEquals(jsonPath.getString("data[0].first_name"), "George");
+        Assert.assertEquals(jsonPath.getString("data[0].last_name"), "Bluth");
+        Assert.assertEquals(jsonPath.getString("data[0].avatar"), "https://reqres.in/img/faces/1-image.jpg");
     }
 
-    @AfterTest
-    public void message() {
-        System.out.println("This Testing is done by KIRAN ");
+    @Test(priority = 5)
+    public void createUserTestInFirstPage() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", 7);
+        map.put("email", "kiran12@reqres.in");
+        map.put("first_name", "KIRAN");
+        map.put("last_name", "KALYAN");
+        map.put("avatar", "https://reqres.in/img/faces/1-image.jpg");
+        JSONObject request = new JSONObject(map);
+        int pageNumber = 1;
+        Response response = given().queryParam("page", pageNumber)
+                .when().post("users")
+                .then().extract().response();
+        Assert.assertEquals(response.statusCode(), 415);
+
+    }
+
+    @Test(priority = 6)
+    public void updateUserTestInFirstPage() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("email", "kiran12@reqres.in");
+        map.put("first_name", "KALYAN");
+        map.put("last_name", "DUKER");
+        map.put("avatar", "https://reqres.in/img/faces/1-image.jpg");
+        JSONObject request = new JSONObject(map);
+        int pageNumber = 1;
+        Response response = given().queryParam("page", pageNumber)
+                .when().put("users/2")
+                .then().extract().response();
+        Assert.assertEquals(response.statusCode(), 200);
+    }
+
+    @Test(priority = 7)
+    public void updateUserPartialTestInFirstPage() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("first_name", "KRISTEN");
+        map.put("last_name", "STEWERT");
+        JSONObject request = new JSONObject(map);
+        int pageNumber = 1;
+        Response response = given().queryParam("page", pageNumber)
+                .when().post("users/2")
+                .then().extract().response();
+        Assert.assertEquals(response.statusCode(), 415);
+    }
+
+    @Test(priority = 8)
+    public void deletingUserDataByPageNO() {
+        int pageNumber = 1;
+        Response response = given().queryParam("page", pageNumber)
+                .when().delete("users/2")
+                .then().extract().response();
+        Assert.assertEquals(response.statusCode(), 204);
     }
 }

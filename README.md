@@ -1,16 +1,16 @@
 <h1 align="center"> Hi!👋 WELCOME TO REST ASSURED API AUTOMATION TESTING PROJECT </h1>
 <p align="left">
 
+---
+
 *Hello Everyone, In this project I used the RESTASSURED as a REpresentational STATE TRANSFER and JAVA as a language.
 Then, I tested the [REQ_RES](https://reqres.in/), [USER_API_DATABASE](http://localhost:3000) and I created local
-JSON-server which has the resources and its JSON data and I validate all the HTTP Methods on the Json data like GET,
-POST, PUT, PATCH, DELETE, DELAY, COPY, LINK, UNLINK, LOCK, UNLOCK, HEAD, VIEW.*
+JSON-server which has the resources and its JSON data, and I validate all the HTTP Methods on the Json data GET, POST,
+PUT, PATCH, DELETE.*
 
 ---
 
-### Web service and Languages used :
-
-<br>
+### IDE and Languages used :
 
 ![Rest-Assured](https://img.shields.io/badge/-Rest%20Assured-4BA82E?&style=for-the-badge&logo=Java&logoColor=white)
 ![Postman](https://img.shields.io/badge/-Postman-%23FF6C37?&style=for-the-badge&logo=Postman&logoColor=white)
@@ -19,57 +19,24 @@ POST, PUT, PATCH, DELETE, DELAY, COPY, LINK, UNLINK, LOCK, UNLOCK, HEAD, VIEW.*
 ![Eclipse](https://img.shields.io/badge/Eclipse%20IDE-%232C2255?&style=for-the-badge&logo=Eclipse%20IDE&logoColor=white)
 
 ---
-webservies Dependencies are used in the  `JRE System Libraries, Maven Dependencies` :
 
-```
-<dependencies>
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>rest-assured</artifactId>
-			<version>4.4.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>7.4.0</version>
-			<scope>test</scope>
-		</dependency>
+### Pre-Requisite
 
-		<dependency>
-			<groupId>com.googlecode.json-simple</groupId>
-			<artifactId>json-simple</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-	</dependencies>
+Dependencies, IDES are used in this Project :
 
-```
+REPOSITORY : [MAVEN_REPOSITORY](https://mvnrepository.com/) <br>
+IDE : [ECLIPSE](https://www.eclipse.org/downloads/) <br>
+NodeJS : [NODEJS](https://nodejs.org/en/download/)
 
 ---
-Run the following the commands from the root
-project [My Project](https://github.com/kiran-purum/RESTASSUREDAPIAUTOMATION) to execute :
-
-```sh
-Maven/Update Project
-```
-
-Used to run the `test cases ` :
-
-```sh
-Run as TestNG
-```
+Run the following the commands from the root [Project](https://github.com/kiran-purum/RESTASSUREDAPIAUTOMATION) to
+execute :
 
 ---
 
-### Getting started With Github
-
-#### Run the following the commands from Terminals Github and CMD :
+#### Run the following the commands to work With GitHub :
 
 To Know Git Installed or not :
-
-```sh
-git init
-```
 
 To add the files  `edited or new files` :
 
@@ -88,24 +55,6 @@ To push the code into git `using branch name` :
 ```sh
 git push origin -u branch_name
 ```
-
-### Run this commands to clone from git
-
-**(*Make sure Your are in the same branch, Which is used to push*)**
-
-To fetch the code from git :
-
-```sh
-git fetch
-```
-
-To pull the code from git :
-
-```sh
-git pull 
-```
-
----
 
 ### Code Contributor
 
