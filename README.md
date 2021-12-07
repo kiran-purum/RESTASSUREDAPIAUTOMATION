@@ -21,22 +21,34 @@ PUT, PATCH, DELETE.*
 ---
 
 ### Pre-Requisite
-
 Dependencies, IDES are used in this Project :
-
 REPOSITORY : [MAVEN_REPOSITORY](https://mvnrepository.com/) <br>
 IDE : [ECLIPSE](https://www.eclipse.org/downloads/) <br>
 NodeJS : [NODEJS](https://nodejs.org/en/download/)
 
 ---
 Run the following the commands from the root [Project](https://github.com/kiran-purum/RESTASSUREDAPIAUTOMATION) to
-execute :
+execute the Test classes :
 
 ---
 
-#### Run the following the commands to work With GitHub :
+### To Local JSON-SERVER DataBase :
 
-To Know Git Installed or not :
+To install the [JSON-SERVER](https://github.com/typicode/json-server) locally
+```
+npm install -g json-server
+```
+To Run json-server
+```
+npx json-server --watch db.json
+```
+baseURI Port number:
+```
+http://localhost:3000
+```
+---
+
+#### Run the following the commands to work With GitHub :
 
 To add the files  `edited or new files` :
 
