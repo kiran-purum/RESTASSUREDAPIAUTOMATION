@@ -1,19 +1,9 @@
 {
   "MOVIES": [
     {
-      "id": 333,
-      "title": "SPIDEY-DONT GO HOME",
-      "actor": "TOM HOLLAND & ZENDAYA"
-    },
-    {
       "id": 444,
       "title": "FAST AND FURIOUS",
       "actor": "DOM & BRAYAN"
-    },
-    {
-      "id": 555,
-      "actor": "JAMES BOND",
-      "title": "NO TIME TO DIE"
     },
     {
       "id": 666,
@@ -31,11 +21,6 @@
       "id": 12,
       "batsmen": "YUVRAJ SINGH",
       "country": "INDIA"
-    },
-    {
-      "id": 18,
-      "batsmen": "ADAM GILLCHRIST",
-      "country": "AUSTRALIA"
     },
     {
       "country": "ENGLAND",
