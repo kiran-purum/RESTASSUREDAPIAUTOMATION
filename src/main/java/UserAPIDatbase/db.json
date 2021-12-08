@@ -1,16 +1,6 @@
 {
   "MOVIES": [
     {
-      "id": 111,
-      "title": "AKANDHA",
-      "actor": "BALAYYA"
-    },
-    {
-      "id": 222,
-      "title": "RRR",
-      "actor": "NTR & RAM"
-    },
-    {
       "id": 333,
       "title": "SPIDEY-DONT GO HOME",
       "actor": "TOM HOLLAND & ZENDAYA"
@@ -48,19 +38,9 @@
       "country": "AUSTRALIA"
     },
     {
-      "id": 333,
-      "batsmen": "CHRIS GAYLE",
-      "country": "WEST INDIES"
-    },
-    {
       "country": "ENGLAND",
       "batsmen": "AIDEN BLIZZARD",
       "id": 21
-    },
-    {
-      "country": "SOUTH AFRICA",
-      "batsmen": "DAVID MILLER",
-      "id": 10
     }
   ]
 }
