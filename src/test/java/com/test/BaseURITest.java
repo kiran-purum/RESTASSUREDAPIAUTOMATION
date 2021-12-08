@@ -1,9 +1,9 @@
 package com.test;
 
 
-import static io.restassured.RestAssured.baseURI;
-
 import org.testng.annotations.BeforeTest;
+
+import static io.restassured.RestAssured.baseURI;
 
 public class BaseURITest {
 

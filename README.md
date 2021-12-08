@@ -17,35 +17,41 @@ PUT, PATCH, DELETE.*
 ![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36.svg?&style=for-the-badge&logo=Apache%20Maven&logoColor=white)
 ![Java](https://img.shields.io/badge/-Java-%23007396?&style=for-the-badge&logo=Java&logoColor=white)
 ![Eclipse](https://img.shields.io/badge/Eclipse%20IDE-%232C2255?&style=for-the-badge&logo=Eclipse%20IDE&logoColor=white)
-
 ---
 
 ### Pre-Requisite
-Dependencies, IDES are used in this Project :
-REPOSITORY : [MAVEN_REPOSITORY](https://mvnrepository.com/) <br>
-IDE : [ECLIPSE](https://www.eclipse.org/downloads/) <br>
-NodeJS : [NODEJS](https://nodejs.org/en/download/)
+
+MAVEN REPOSITORY : [MAVEN_REPOSITORY](https://mvnrepository.com/) <br>
+IDE'S : [ECLIPSE](https://www.eclipse.org/downloads/)  (
+or) [INTELLIJ IDEA](https://www.jetbrains.com/idea/download/#section=windows) <br>
+NodeJS : [NODEJS](https://nodejs.org/en/download/) <br>
+JAVA JDK : [JAVA JDK](https://download.oracle.com/java/17/latest/jdk-17_windows-x64_bin.exe)
 
 ---
 Run the following the commands from the root [Project](https://github.com/kiran-purum/RESTASSUREDAPIAUTOMATION) to
 execute the Test classes :
-
 ---
 
 ### To Local JSON-SERVER DataBase :
 
 To install the [JSON-SERVER](https://github.com/typicode/json-server) locally
+
 ```
 npm install -g json-server
 ```
+
 To Run json-server
+
 ```
 npx json-server --watch db.json
 ```
-baseURI Port number:
+
+It will run on baseURI Port number:
+
 ```
 http://localhost:3000
 ```
+
 ---
 
 #### Run the following the commands to work With GitHub :
@@ -67,6 +73,20 @@ To push the code into git `using branch name` :
 ```sh
 git push origin -u branch_name
 ```
+
+To fetch the code from git
+
+```sh
+git fetch
+```
+
+To pull the code from git :
+
+```sh
+git pull
+```
+
+---
 
 ### Code Contributor
 

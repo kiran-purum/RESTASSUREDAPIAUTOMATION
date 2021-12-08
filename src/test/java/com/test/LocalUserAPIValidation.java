@@ -3,147 +3,185 @@ package com.test;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.json.simple.JSONObject;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static io.restassured.RestAssured.*;
+import static com.resources.PayloadData.*;
+import static com.utils.ResponseToJsonPath.ConvertResponseToJsonConverter;
+import static io.restassured.RestAssured.given;
 
 public class LocalUserAPIValidation extends BaseURITest {
 
     @Test
     public void getListOfMovies() {
-        Response response = given().get("/MOVIES")
+        int dataSize = 2;
+        Response response = given()
+                .when().contentType(ContentType.JSON).get("/MOVIES")
                 .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
         Assert.assertEquals(response.statusCode(), 200);
-        System.out.println(response.asPrettyString());
-        JsonPath jsonPath = new JsonPath(response.asString());
-        Assert.assertEquals(jsonPath.getList("MOVIES").size(), 4);
+        Assert.assertEquals(jsonPath.getList("MOVIES").size(), dataSize);
     }
 
     @Test(priority = 1)
     public void getListOfSports() {
-        Response response = given().get("/SPORTS").
-                then().extract().response();
+        int dataSize = 3;
+        Response response = given()
+                .when().contentType(ContentType.JSON).get("/SPORTS")
+                .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
         Assert.assertEquals(response.statusCode(), 200);
-        JsonPath jsonPath = new JsonPath(response.asPrettyString());
-        Assert.assertEquals(jsonPath.getList("SPORTS").size(), 5);
+        Assert.assertEquals(jsonPath.getList("SPORTS").size(), dataSize);
     }
 
     @Test(priority = 2)
     public void getMovieById() {
-        Response response = given().get("/MOVIES/222")
+        Response response = given()
+                .when().contentType(ContentType.JSON).get("/MOVIES/666")
                 .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
         Assert.assertEquals(response.statusCode(), 200);
-        System.out.println(response.asString());
+        Assert.assertNotNull(jsonPath.getString("id"));
     }
 
     @Test(priority = 3)
     public void getSportById() {
-        Response response = given().get("/SPORTS/333")
+        Response response = given()
+                .when().contentType(ContentType.JSON).get("/SPORTS/12")
                 .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
         Assert.assertEquals(response.statusCode(), 200);
-        System.out.println(response.asString());
+        Assert.assertNotNull(jsonPath.getString("id"));
     }
 
     @Test(priority = 4)
     public void getMovieByName() {
-        Response response = given().get("/MOVIES?title=RRR")
+        String movieName = "RRR";
+        Response response = given().queryParam("MOVIES", movieName)
+                .when().contentType(ContentType.JSON).get("/MOVIES")
                 .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
         Assert.assertEquals(response.statusCode(), 200);
-        System.out.println(response.asString());
+        Assert.assertNotNull(jsonPath.getString("title"));
     }
 
     @Test(priority = 5)
     public void getSportByName() {
-        Response response = given().get("/SPORTS?batsmen=YUVRAJ SINGH")
+        String batsmenName = "YUVRAJ SINGH";
+        Response response = given().queryParam("SPORTS", batsmenName)
+                .when().contentType(ContentType.JSON).get("/SPORTS")
                 .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
         Assert.assertEquals(response.statusCode(), 200);
-        System.out.println(response.asString());
+        Assert.assertNotNull(jsonPath.getString("batsmen"));
     }
 
     @Test(priority = 6)
     public void createDataInMovies() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("title", "THE EXPANSE");
-        map.put("actor", "JORDAN AMOS");
-        map.put("id", 43);
-        JSONObject request = new JSONObject(map);
-        Response response = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString())
+        String title = "PRISON BREAK SERIES";
+        String actor = "WENTWORTH MILLER";
+        int id = 222;
+        Response response = given()
+                .when().contentType(ContentType.JSON)
+                .body(createUserDataInLocalApi(title, actor, id))
                 .when().post("/MOVIES")
                 .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
         Assert.assertEquals(response.statusCode(), 201);
-        System.out.println(response.asString());
+        Assert.assertEquals(jsonPath.getString("title"), title);
+        Assert.assertEquals(jsonPath.getString("actor"), actor);
+        Assert.assertEquals(jsonPath.getInt("id"), id);
     }
 
     @Test(priority = 7)
     public void createDataInSports() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("batsmen", "DAVID MILLER");
-        map.put("country", "SOUTH AFRICA");
-        map.put("id", 10);
-        JSONObject request = new JSONObject(map);
-        Response response = given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString())
-                .when().post("/SPORTS")
+        String batsmen = "DAVID MILLER";
+        String country = "SOUTH AFRICA";
+        Response response = given()
+                .when().contentType(ContentType.JSON)
+                .body(createUserDataInLocal(batsmen, country)).post("/SPORTS")
                 .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
         Assert.assertEquals(response.statusCode(), 201);
-        System.out.println(response.asString());
+        Assert.assertEquals(jsonPath.getString("batsmen"), batsmen);
+        Assert.assertEquals(jsonPath.getString("country"), country);
+        Assert.assertNotNull(jsonPath.getString("id"));
     }
 
     @Test(priority = 8)
     public void updateDataTestInMovies() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("title", "THE 100");
-        map.put("actor", "CLARKE");
-        JSONObject request = new JSONObject(map);
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
-                when().put("/MOVIES/43").
-                then().statusCode(200).log().all();
+        String title = "THE 100";
+        String actor = "EMILY";
+        int id = 222;
+        Response response = given()
+                .when().contentType(ContentType.JSON)
+                .body(createUserDataInLocalApi(title, actor, id)).put("/MOVIES/222")
+                .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
+        Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(jsonPath.getString("title"), title);
+        Assert.assertEquals(jsonPath.getString("actor"), actor);
     }
 
     @Test(priority = 9)
     public void updateDataTestInSports() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("batsmen", "SANGAKKARA");
-        map.put("country", "SRI LANKA");
-        JSONObject request = new JSONObject(map);
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
-                when().put("/SPORTS/10").
-                then().statusCode(200).log().all();
+        String batsmen = "KEVIN PETERSON";
+        String country = "ENGLAND";
+        Response response = given()
+                .when().contentType(ContentType.JSON)
+                .body(createUserDataInLocal(batsmen, country)).put("/SPORTS/22")
+                .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
+        Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(jsonPath.getString("batsmen"), batsmen);
+        Assert.assertEquals(jsonPath.getString("country"), country);
+        Assert.assertNotNull(jsonPath.getString("id"));
     }
 
     @Test(priority = 10)
     public void updatePartialDataTestInMovies() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("title", "INNOCENT");
-        JSONObject request = new JSONObject(map);
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
-                when().patch("/MOVIES/222").
-                then().statusCode(200).log().all();
+        String title = "PRODIGY";
+        String actor = "LITTLE KID";
+        Response response = given()
+                .when().contentType(ContentType.JSON)
+                .body(updateUserDataInLocalApi(title, actor)).put("/MOVIES/222")
+                .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
+        Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(jsonPath.getString("title"), title);
+        Assert.assertEquals(jsonPath.getString("actor"), actor);
     }
 
     @Test(priority = 11)
     public void updatePartialDataTestInSports() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("batsmen", "BEN STOKES");
-        JSONObject request = new JSONObject(map);
-        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
-                when().patch("/SPORTS/333").
-                then().statusCode(200).log().all();
+        String batsmen = "NICOLAS POORAN";
+        String country = "WEST INDIES";
+        Response response = given()
+                .when().contentType(ContentType.JSON)
+                .body(createUserDataInLocal(batsmen, country)).put("/SPORTS/22")
+                .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
+        Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(jsonPath.getString("batsmen"), batsmen);
+        Assert.assertEquals(jsonPath.getString("country"), country);
+        Assert.assertNotNull(jsonPath.getString("id"));
     }
 
     @Test(priority = 12)
     public void deleteTestDataInMovies() {
-        when().delete("/MOVIES/111").
-                then().statusCode(200).log().all();
+        Response response = given()
+                .when().contentType(ContentType.JSON).delete("/MOVIES/222")
+                .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
+        Assert.assertEquals(response.statusCode(), 200);
     }
 
     @Test(priority = 13)
     public void deleteTestDataInSports() {
-        when().delete("/SPORTS/10").
-                then().statusCode(200).log().all();
+        Response response = given()
+                .when().contentType(ContentType.JSON).delete("/SPORTS/22")
+                .then().extract().response();
+        JsonPath jsonPath = ConvertResponseToJsonConverter(response);
+        Assert.assertEquals(response.statusCode(), 200);
     }
 }
