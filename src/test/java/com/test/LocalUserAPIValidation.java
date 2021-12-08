@@ -16,7 +16,7 @@ public class LocalUserAPIValidation extends BaseURITest {
 
     @Test
     public void getListOfMovies() {
-        Response response = given().get("MOVIES")
+        Response response = given().get("/MOVIES")
                 .then().extract().response();
         Assert.assertEquals(response.statusCode(), 200);
         System.out.println(response.asPrettyString());
@@ -26,7 +26,7 @@ public class LocalUserAPIValidation extends BaseURITest {
 
     @Test(priority = 1)
     public void getListOfSports() {
-        Response response = given().get("SPORTS").
+        Response response = given().get("/SPORTS").
                 then().extract().response();
         Assert.assertEquals(response.statusCode(), 200);
         JsonPath jsonPath = new JsonPath(response.asPrettyString());
@@ -100,7 +100,50 @@ public class LocalUserAPIValidation extends BaseURITest {
         map.put("actor", "CLARKE");
         JSONObject request = new JSONObject(map);
         given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
-                when().put("/MOVIES").
-                then().statusCode(404).log().all();
+                when().put("/MOVIES/43").
+                then().statusCode(200).log().all();
+    }
+
+    @Test(priority = 9)
+    public void updateDataTestInSports() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("batsmen", "SANGAKKARA");
+        map.put("country", "SRI LANKA");
+        JSONObject request = new JSONObject(map);
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
+                when().put("/SPORTS/10").
+                then().statusCode(200).log().all();
+    }
+
+    @Test(priority = 10)
+    public void updatePartialDataTestInMovies() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("title", "INNOCENT");
+        JSONObject request = new JSONObject(map);
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
+                when().patch("/MOVIES/222").
+                then().statusCode(200).log().all();
+    }
+
+    @Test(priority = 11)
+    public void updatePartialDataTestInSports() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("batsmen", "BEN STOKES");
+        JSONObject request = new JSONObject(map);
+        given().contentType(ContentType.JSON).accept(ContentType.JSON).body(request.toJSONString()).
+                when().patch("/SPORTS/333").
+                then().statusCode(200).log().all();
+    }
+
+    @Test(priority = 12)
+    public void deleteTestDataInMovies() {
+        when().delete("/MOVIES/111").
+                then().statusCode(200).log().all();
+    }
+
+    @Test(priority = 13)
+    public void deleteTestDataInSports() {
+        when().delete("/SPORTS/10").
+                then().statusCode(200).log().all();
     }
 }
