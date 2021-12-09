@@ -22,11 +22,10 @@ public class PayloadData {
         return payload;
     }
 
-    public static Map<String, Object> createUserDataInLocalApi(String title, String actor, int id) {
-        Map<String, Object> payloadData = new HashMap<>();
+    public static Map<String, String> createUserDataInLocalApi(String title, String actor) {
+        Map<String, String> payloadData = new HashMap<>();
         payloadData.put("title", title);
         payloadData.put("actor", actor);
-        payloadData.put("id", id);
         return payloadData;
     }
 
@@ -37,8 +36,8 @@ public class PayloadData {
         return payloadData;
     }
 
-    public static Map<String, Object> updateUserDataInLocalApi(String title, String actor) {
-        Map<String, Object> payloadData = new HashMap<>();
+    public static Map<String, String> updateUserDataInLocalApi(String title, String actor) {
+        Map<String, String> payloadData = new HashMap<>();
         payloadData.put("title", title);
         payloadData.put("actor", actor);
         return payloadData;
