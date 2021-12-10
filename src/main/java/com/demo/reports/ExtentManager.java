@@ -1,21 +1,14 @@
-package com.test;
+package com.demo.reports;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
 
-import static io.restassured.RestAssured.baseURI;
+public class ExtentManager {
+    private static ExtentReports extent;
+    public static ExtentTest test;
 
-public class BaseTest {
-
-    static ExtentReports extent;
-    static ExtentTest test;
-
-    @BeforeSuite
     public static void configReport() {
         extent = new ExtentReports();
         ExtentSparkReporter spark = new ExtentSparkReporter("report/index.html");
@@ -25,9 +18,9 @@ public class BaseTest {
         extent.attachReporter(spark);
     }
 
-    @AfterSuite
     public static void flushReport() {
         extent.flush();
+
     }
 
     public static void createTest(String testName, String testCategory, String authorName, String testDeviceName) {
@@ -36,10 +29,4 @@ public class BaseTest {
                 .assignAuthor(authorName)
                 .assignDevice(testDeviceName);
     }
-
-    @BeforeTest
-    public void setUp() {
-        baseURI = "https://reqres.in/api";
-    }
-
 }

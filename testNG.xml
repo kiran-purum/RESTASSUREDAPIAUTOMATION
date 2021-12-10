@@ -1,16 +1,19 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="ALL API TESTS" verbose="1">
+    <listeners>
+        <listener class-name="com.demo.listeners.TestNGListeners"></listener>
+    </listeners>
     <test name="ReqRes API">
         <classes>
-            <class name="com.test.GetMethodExamples"/>
-            <class name="com.test.HttpMethodsExamples"/>
+            <class name="com.demo.reqres.in.GetMethodExamples"/>
+            <class name="com.demo.reqres.in.HttpMethodsExamples"/>
         </classes>
     </test>
 
     <test name="Local API">
         <classes>
-            <class name="com.test.LocalUserAPIValidation"/>
+            <class name="com.demo.localApiValidationOnSports.LocalUserAPIValidation"/>
         </classes>
     </test>
 </suite>

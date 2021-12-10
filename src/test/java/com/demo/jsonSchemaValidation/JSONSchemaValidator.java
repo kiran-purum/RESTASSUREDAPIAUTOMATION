@@ -1,4 +1,4 @@
-package com.test;
+package com.demo.jsonSchemaValidation;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;

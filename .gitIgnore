@@ -3,6 +3,8 @@
 .settings
 .metadata
 /test-output/
-/target/
+/target/generated-sources/
+/target/generated-test-sources/
+/target/test-classes/
 .idea/
-/src/main/java/UserAPIDatbase/node_modules/
+/src/main/java/com/demo/localApiDatabase/node_modules/

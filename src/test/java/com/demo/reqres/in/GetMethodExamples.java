@@ -1,11 +1,12 @@
-package com.test;
+package com.demo.reqres.in;
 
+import com.demo.basetest.BaseTest;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static com.utils.ResponseToJsonPath.ConvertResponseToJsonConverter;
+import static com.demo.utils.ResponseToJsonPath.ConvertResponseToJsonConverter;
 import static io.restassured.RestAssured.given;
 
 public class GetMethodExamples extends BaseTest {
@@ -15,7 +16,6 @@ public class GetMethodExamples extends BaseTest {
         int pageNumber = 1;
         String emailContains = "@reqres.in";
         String email = "george.bluth@reqres.in";
-        BaseTest.createTest("Get List of User By PageNo Test", "Regression", "KIRAN", "chrome 96");
         Response response = given().queryParam("page", pageNumber)
                 .when().get("users")
                 .then().extract().response();
@@ -34,7 +34,6 @@ public class GetMethodExamples extends BaseTest {
     public static void getListUsersByPageNo() {
         int pageNumber = 2;
         String firstName = "Rachel";
-        BaseTest.createTest("Get List of User By PageNo", "Regression", "KIRAN", "chrome 96");
         Response response = given().queryParam("page", pageNumber)
                 .when().get("users")
                 .then().extract().response();
