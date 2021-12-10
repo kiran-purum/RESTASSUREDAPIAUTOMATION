@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "MOVIES": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "title": {
+              "type": "string"
+            },
+            "actor": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "title",
+            "actor"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "actor": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "actor",
+            "title"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "actor": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "actor",
+            "title",
+            "id"
+          ]
+        }
+      ]
+    },
+    "SPORTS": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "batsmen": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "batsmen",
+            "country"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "batsmen": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "batsmen",
+            "country"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "country": {
+              "type": "string"
+            },
+            "batsmen": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "country",
+            "batsmen",
+            "id"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "MOVIES",
+    "SPORTS"
+  ]
+}

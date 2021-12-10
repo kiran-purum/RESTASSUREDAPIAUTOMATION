@@ -6,7 +6,13 @@
 *Hello Everyone, In this project I used the RESTASSURED as a REpresentational STATE TRANSFER and JAVA as a language.
 Then, I tested the [REQ_RES](https://reqres.in/), [USER_API_DATABASE](http://localhost:3000) and I created local
 JSON-server which has the resources and its JSON data, and I validate all the HTTP Methods on the Json data GET, POST,
-PUT, PATCH, DELETE.*
+PUT, PATCH, DELETE. Then, I created a Local_API
+using [JSON_SERVER](https://github.com/typicode/json-server#getting-started)
+it will create a local database with data. Then, I validate the json schema and then created Extent Reports can refer to
+this [ExtentReports](https://www.youtube.com/playlist?list=PL9ok7C7Yn9A-yUEnE62gOQ2B4pL3gsC28)
+and Created using testNg.xml file will run parallel Execution all test cases, can refer to
+this [TestNG.xml](https://testng.org/doc/documentation-main.html#testng-xml)
+file to execute all the test cases in every class.*
 
 ---
 
@@ -30,6 +36,11 @@ JAVA JDK : [JAVA JDK](https://download.oracle.com/java/17/latest/jdk-17_windows-
 ---
 Run the following the commands from the root [Project](https://github.com/kiran-purum/RESTASSUREDAPIAUTOMATION) to
 execute the Test classes :
+
+```
+Run testNg.xml 
+```
+
 ---
 
 ### To Local JSON-SERVER DataBase :
@@ -56,34 +67,16 @@ http://localhost:3000
 
 #### Run the following the commands to work With GitHub :
 
-To add the files  `edited or new files` :
-
-```sh
-git add .  (will add all files)
-```
-
-To commit the added files `"can add Message"` :
-
-```sh
-git commit -m  "message"
-```
-
-To push the code into git `using branch name` :
-
-```sh
-git push origin -u branch_name
-```
-
 To fetch the code from git
 
 ```sh
-git fetch
+git fetch https://github.com/kiran-purum/RESTASSUREDAPIAUTOMATION
 ```
 
 To pull the code from git :
 
 ```sh
-git pull
+git pull https://github.com/kiran-purum/RESTASSUREDAPIAUTOMATION
 ```
 
 ---
@@ -107,7 +100,7 @@ This project exists, thanks to my Trainer. [[SADAB SAQIB]](https://github.com/sa
 
 Please ⭐️ this repository if this project helped you!
 
-<a href="https://github.com/kiran-purum"> </a>
+Git Hub : [kiran-purum](https://github.com/kiran-purum)
 
 ---
 
